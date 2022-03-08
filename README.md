@@ -4,11 +4,30 @@ In this article, I will show you an interesting way to debug applications. This 
 
 ## How do we debug today
 
-* Print some variable value to stdout
-* Step-by-step debugger in IDE
-* Maybe even time-travel debugger
-* Viewing logs
+* 🖨️ Print some variable value to stdout
+* ▶️ Step-by-step debugger in IDE
+* 🔙 Maybe even time-travel debugger
+* 📜 Viewing logs
 
-## Problems with current debug techniqes
+## Disadvantages of current debug techniqes
 
-#### Print some variable value to stdout
+#### 🖨️ Print some variable value to stdout
+
+* 🐌 Low debug performance
+* ↔️ Context switch between your code and stdout
+* 🔁 Often need to rerun your program again and again
+
+#### ▶️ Step-by-step debugger in IDE
+
+* 🐌 Low debug performance
+* 🔁 Often need to rerun your program again and again
+
+#### 🔙 Time-travel debugger
+
+* 🏋️ Often very hard to implement
+* 💲 Often not free
+
+#### 📜 Viewing logs
+
+* 🐌 Low debug performance
+* ↔️ Context switch between your code and stdout
