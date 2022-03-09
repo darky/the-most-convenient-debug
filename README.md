@@ -30,4 +30,16 @@ In this article, I will show you an interesting way to debug applications. This 
 #### 📜 Viewing logs
 
 * 🐌 Low debug performance
-* ↔️ Context switch between your code and stdout
+* ↔️ Context switch between your code and logs
+
+## Another way to debug - Smart Logs
+
+As you see in the screenshot, **Smart Logs** attached to your functions or class methods and trace every function call, call parameters, response, duration and so on. Pros:
+
+* 🚀 Faster debug performance
+* 🤝 No context switch between your code and logs
+* 😊 No need to run the program again and again
+
+## How it works
+
+Further we will see an implementation example. It's based on JavaScript/TypeScript and Node.js runtime, but it can be implemented on any programming language and any runtime. VSCode used as IDE, but any other IDE should be suitable too for this purpose. 
