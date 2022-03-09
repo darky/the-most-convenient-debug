@@ -13,13 +13,13 @@ In this article, I will show you an interesting way to debug applications. This 
 
 #### 🖨️ Print some variable value to stdout
 
-* 🐌 Low debug performance
+* 🐌 Slower debug performance
 * ↔️ Context switch between your code and stdout
 * 🔁 Often need to rerun your program again and again
 
 #### ▶️ Step-by-step debugger in IDE
 
-* 🐌 Low debug performance
+* 🐌 Slower debug performance
 * 🔁 Often need to rerun your program again and again
 
 #### 🔙 Time-travel debugger
@@ -29,7 +29,7 @@ In this article, I will show you an interesting way to debug applications. This 
 
 #### 📜 Viewing logs
 
-* 🐌 Low debug performance
+* 🐌 Slower debug performance
 * ↔️ Context switch between your code and logs
 
 ## Another way to debug - Smart Logs
@@ -42,4 +42,9 @@ As you see in the screenshot, **Smart Logs** attached to your functions or class
 
 ## How it works
 
-Further we will see an implementation example. It's based on JavaScript/TypeScript and Node.js runtime, but it can be implemented on any programming language and any runtime. VSCode used as IDE, but any other IDE should be suitable too for this purpose. 
+Further we will see an implementation example. It's based on JavaScript/TypeScript and Node.js runtime, but it can be implemented on lot programming languages and runtimes. VSCode used as IDE, but other IDE should be suitable too for this purpose.
+
+#### Requirements
+
+* 🔎 Ability to reflect function location in code (https://github.com/midrissi/func-loc)
+* 🗒️ Line note ability in IDE (https://marketplace.visualstudio.com/items?itemName=tkrkt.linenote)
