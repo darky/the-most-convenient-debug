@@ -4,14 +4,14 @@ In this article, I will show you an interesting way to debug applications. This 
 
 ## How do we debug today
 
-* 🖨️ Print some variable value to stdout
+* 🖨️ Print to stdout
 * ▶️ Step-by-step debugger in IDE
 * 🔙 Maybe even time-travel debugger
 * 📜 Viewing logs
 
 ## Disadvantages of current debug techniqes
 
-#### 🖨️ Print some variable value to stdout
+#### 🖨️ Print to stdout
 
 * 🐌 Slower debug performance
 * ↔️ Context switch between your code and stdout
@@ -34,13 +34,15 @@ In this article, I will show you an interesting way to debug applications. This 
 
 ## Another way to debug - Smart Logs
 
-As you see in the screenshot, **Smart Logs** attached to your functions or class methods and trace every function call, call parameters, response, duration and so on. Pros:
+![image](https://user-images.githubusercontent.com/1832800/157913106-dbf1c6b5-0774-424b-9f58-0c8cf63a7e34.png)
+
+As you see on the screenshot, **Smart Logs** attached to functions and trace call of every function: parameters, response, possible error and so on. Pros:
 
 * 🚀 Faster debug performance
 * 🤝 No context switch between your code and logs
 * 😊 No need to run the program again and again
 
-## How it works
+## Implementation example
 
 Further we will see an implementation example. It's based on JavaScript/TypeScript and Node.js runtime, but it can be implemented on lot programming languages and runtimes. VSCode used as IDE, but other IDE should be suitable too for this purpose.
 
@@ -48,3 +50,31 @@ Further we will see an implementation example. It's based on JavaScript/TypeScri
 
 * 🔎 Ability to reflect function location in code (https://github.com/midrissi/func-loc)
 * 🗒️ Line note ability in IDE (https://marketplace.visualstudio.com/items?itemName=tkrkt.linenote)
+
+#### Code
+
+```javascript
+import { locate } from 'func-loc';
+import { appendFile, mkdir } from 'fs/promises';
+import endent from 'endent';
+
+const ln = fn => {
+  return function (...params) {
+    const resp = fn.apply(this, params);
+
+    Promise.resolve(Promise.allSettled([locate(fn), resp])).then(async ([loc, respOrErr]) => {
+      await mkdir(`${process.cwd()}/.vscode/linenote`, { recursive: true });
+      await appendFile(
+        loc.value.path.replace(process.cwd(), `${process.cwd()}/.vscode/linenote`).concat(`#L${loc.value.line}.md`),
+        endent.default`
+          params: ${params},
+          ${respOrErr.value ? `response: ${respOrErr.value}` : `error: ${respOrErr.reason}`}
+          \\n\\n
+        `
+      );
+    });
+
+    return resp;
+  };
+};
+```
