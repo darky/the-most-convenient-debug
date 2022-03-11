@@ -44,7 +44,7 @@ As you see on the screenshot, **Smart Logs** attached to functions and trace cal
 
 ## Implementation example
 
-Further we will see an implementation example. It's based on JavaScript/TypeScript and Node.js runtime, but it can be implemented on lot programming languages and runtimes. VSCode used as IDE, but other IDE should be suitable too for this purpose.
+Further we will see an implementation example. **It's based on JavaScript/TypeScript and Node.js runtime**, but it can be implemented on lot programming languages and runtimes. **VSCode used as IDE**, but other IDE should be suitable too for this purpose.
 
 #### Requirements
 
@@ -65,7 +65,7 @@ const ln = fn => {
     Promise.resolve(Promise.allSettled([locate(fn), resp])).then(async ([loc, respOrErr]) => {
       await mkdir(`${process.cwd()}/.vscode/linenote`, { recursive: true });
       await appendFile(
-        loc.value.path.replace(process.cwd(), `${process.cwd()}/.vscode/linenote`).concat(`#L${loc.value.line}.md`),
+        loc.value.path.replace(process.cwd(), `${process.cwd()}/.vscode/linenote`) + `#L${loc.value.line}.md`,
         endent.default`
           params: ${params},
           ${respOrErr.value ? `response: ${respOrErr.value}` : `error: ${respOrErr.reason}`}
@@ -78,3 +78,33 @@ const ln = fn => {
   };
 };
 ```
+
+* `ln` (alias to line note) is wrapper of target function `fn`
+* `ln` intercepts parameters and response of `fn` or possible error inside `fn`
+* `ln` reflects `fn` location in code
+* using `fn` code location, `ln` create/append **Line Note** file on proper line with paramaters and response of `fn` in content
+
+## By the way
+
+* In code above ☝️ parameters and response interpolated to string "as is". On real production code you deal with complex JSON structures, which should be properly serialized
+* You can add your own additional info: duration, timestamp and so on
+* You can write TypeScript class decorator, which wrap all class methods for **Smart Logs** support
+* On example used FILO via `appendFile`, but with https://github.com/hemanth/node-prepend-file you can change to FIFO
+* You may get `EBUSY` error via concurrent access to same **Line Note** file. This sutation can be fixed via repeat strategy, using something like https://github.com/sindresorhus/p-retry
+* You can write custom import to **Smart Logs**. For example: ELK logs -> **Smart Logs**
+
+
+## What about compiled to JavaScript languages like TypeScript?
+
+**func-loc** supports source maps https://github.com/midrissi/func-loc#using-source-maps
+
+## What about frontend?
+
+**func-loc** uses Node.js inspector underhood https://nodejs.org/dist/latest-v17.x/docs/api/inspector.html
+
+But despite this, I think you can use **Smart Logs** with frontend using Electron, which support Node.js API and Browser API simuateniously https://www.electronjs.org/
+
+## What if my programming language / runtime can't reflect function location dynamically?
+
+Maybe it can reflect function location statically via compiler/transpiler and so on.
+
