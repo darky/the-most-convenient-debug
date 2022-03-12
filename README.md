@@ -62,7 +62,7 @@ const ln = fn => {
   return function (...params) {
     const resp = fn.apply(this, params);
 
-    Promise.resolve(Promise.allSettled([locate(fn), resp])).then(async ([loc, respOrErr]) => {
+    Promise.allSettled([locate(fn), resp]).then(async ([loc, respOrErr]) => {
       await mkdir(`${process.cwd()}/.vscode/linenote`, { recursive: true });
       await appendFile(
         loc.value.path.replace(process.cwd(), `${process.cwd()}/.vscode/linenote`) + `#L${loc.value.line}.md`,
