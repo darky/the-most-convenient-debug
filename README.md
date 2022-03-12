@@ -106,5 +106,5 @@ But despite this, I think you can use **Smart Logs** with frontend using Electro
 
 ## What if my programming language / runtime can't reflect function location dynamically?
 
-Maybe it can reflect function location statically via compiler/transpiler and so on.
+Maybe it can reflect function location statically via compiler/transpiler/macro and so on.
 
