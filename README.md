@@ -1,5 +1,8 @@
 # The most convenient way to debug applications
 
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/1832800/158459075-683de787-7647-455a-9075-0f41a1ca07c9.gif)
+
+
 In this article, I will show you an interesting way to debug applications. This is somewhat different from the usual methods that you use in your daily work.
 
 ## How do we debug today
