@@ -1,6 +1,6 @@
 # The most convenient way to debug applications
 
-![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/1832800/158873922-8e3b4ff7-6235-428a-a733-062cab8e6dae.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/1832800/159041027-ed8c5888-9edf-4e5d-b0a4-2283a94ca094.gif)
 
 
 In this article, I will show you an interesting way to debug applications. This is somewhat different from the usual methods that you use in your daily work.
